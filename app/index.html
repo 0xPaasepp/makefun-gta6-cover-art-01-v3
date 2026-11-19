@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velvet Heat — Cover Studio</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <aside class="panel" aria-label="Cover editor">
+    <header>
+      <h1>Velvet Heat</h1>
+      <p class="sub">Cover Studio — your photos into GTA-style key art. Offline, nothing uploads.</p>
+    </header>
+
+    <section>
+      <h2>Template</h2>
+      <div id="templates" class="tpls"></div>
+    </section>
+
+    <section>
+      <h2>Grade</h2>
+      <div id="grades" class="grades"></div>
+      <div class="sliders">
+        <label>Contrast <input id="sl-contrast" type="range" min="0.7" max="1.5" step="0.01" value="1"><span id="sl-contrast-val">1.00</span></label>
+        <label>Saturation <input id="sl-saturation" type="range" min="0.5" max="1.8" step="0.01" value="1"><span id="sl-saturation-val">1.00</span></label>
+        <label>Brightness <input id="sl-brightness" type="range" min="0.7" max="1.3" step="0.01" value="1"><span id="sl-brightness-val">1.00</span></label>
+        <label>Warmth <input id="sl-temperature" type="range" min="-40" max="40" step="1" value="0"><span id="sl-temperature-val">0</span></label>
+      </div>
+      <div class="toggles">
+        <label><input id="tg-grain" type="checkbox" checked> Grain</label>
+        <label><input id="tg-vignette" type="checkbox" checked> Vignette</label>
+        <label><input id="tg-halftone" type="checkbox" checked> Halftone</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Lettering</h2>
+      <label>Title <input id="in-title" type="text" maxlength="24" value="VELVET HEAT"></label>
+      <label>Subtitle <input id="in-subtitle" type="text" maxlength="40" value="Miramar nights"></label>
+      <label>Eyebrow <input id="in-eyebrow" type="text" maxlength="40" value="WELCOME TO MIRAMAR"></label>
+      <label>Tagline <input id="in-tagline" type="text" maxlength="60" value="ONE CITY. EVERY SUMMER ENDS."></label>
+      <label>Cover line <input id="in-caption" type="text" maxlength="60" value="One last summer in Miramar"></label>
+    </section>
+
+    <section>
+      <h2>Photos <span class="hint">click a photo, then a panel — or drag a panel to crop</span></h2>
+      <div id="tray" class="tray"></div>
+      <label class="upload">Upload photos <input id="upload" type="file" accept="image/*" multiple></label>
+    </section>
+
+    <section>
+      <h2>Selected panel — <span id="selected-panel">Panel 1 of 9</span></h2>
+      <label>Panel grade
+        <select id="panel-grade">
+          <option value="cover">Cover grade</option>
+          <option value="ink">Ink</option>
+          <option value="sunset">Sunset</option>
+          <option value="neon">Neon</option>
+          <option value="golden">Golden</option>
+          <option value="duotone">Duotone</option>
+          <option value="photo">Clean photo</option>
+        </select>
+      </label>
+      <label>Rotate <input id="panel-rot" type="range" min="-30" max="30" step="1" value="0"></label>
+      <label>Zoom <input id="panel-zoom" type="range" min="1" max="3" step="0.05" value="1"></label>
+      <button id="fill-one" type="button">Fill one photo</button>
+    </section>
+
+    <section class="actions">
+      <div class="row">
+        <button id="undo" type="button">Undo</button>
+        <button id="redo" type="button">Redo</button>
+      </div>
+      <label>Preview size
+        <select id="size">
+          <option value="0">1080 × 1080</option>
+          <option value="1">1080 × 1350</option>
+          <option value="2" selected>1920 × 1080</option>
+        </select>
+      </label>
+      <button id="export-all" type="button" class="primary">Export all 3 sizes</button>
+      <p id="status" role="status"></p>
+    </section>
+  </aside>
+
+  <section class="stage">
+    <canvas id="cover" width="1920" height="1080" aria-label="The cover preview"></canvas>
+    <div id="export-proof" class="proof"></div>
+  </section>
+</main>
+<script type="module">
+  import { createEditor } from './src/main.js';
+  createEditor(document.getElementById('cover'));
+</script>
+</body>
+</html>
